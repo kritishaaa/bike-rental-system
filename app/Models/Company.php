@@ -15,6 +15,6 @@ class Company extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class)->where('role', '=', 'admin');
+        return $this->belongsTo(User::class)->where('role', '=', 'admin');
     }
 }

@@ -43,6 +43,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Rent::class);
     }
 
+    public function company()
+    {
+        return $this->hasOne(Company::class);
+    }
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

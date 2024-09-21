@@ -8,10 +8,12 @@ use App\Filament\Resources\BikeResource\Pages;
 use App\Models\Bike;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 
@@ -50,6 +52,7 @@ class BikeResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('variant.variant_image')->height(35)->width(50),
                 TextColumn::make('number_plate'),
                 TextColumn::make('cc'),
                 TextColumn::make('status'),
@@ -68,6 +71,15 @@ class BikeResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->label('Delete')
+                    ->requiresConfirmation()
+                    ->successNotification(
+                        Notification::make()
+                            ->success()
+                            ->title('Company deleted')
+                            ->body('The Company has been deleted successfully.'),
+                    ),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

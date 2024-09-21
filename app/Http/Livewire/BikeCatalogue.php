@@ -57,7 +57,7 @@ class BikeCatalogue extends Component
             ->where('bikes.status', '=', 'Available')
             ->when($this->priceorder, function ($q1) {
                 $q1->orderBy('variant_rental_price', $this->priceorder);
-            })->paginate(10);
+            })->paginate(12);
 
         return view('livewire.bike-catalogue', compact('bikes'));
     }

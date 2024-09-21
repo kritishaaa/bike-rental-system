@@ -24,13 +24,13 @@
                     type="submit">Find a Bike</button>
             </div>
 
-            <div class="text-white">
-
-                <p class="font-semibold text-3xl"> Your best experiences</p>
-                <p class="font-normal text-md">Rent our best bike on ride</p>
-                <button class="bg-slate-600 px-3 py-1 rounded my-1" type="button">Discover</button>
-
-            </div>
+           <div class="text-white">
+    <p class="font-semibold text-3xl">Your best experiences</p>
+    <p class="font-normal text-md">Rent our best bike on ride</p>
+    <a href="{{ route('renter.showbikes') }}" class="bg-slate-600 px-3 py-1 rounded my-1 inline-block text-center">
+        Discover
+    </a>
+</div>
 
         </div>
 

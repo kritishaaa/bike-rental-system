@@ -44,7 +44,6 @@
 
           <div class="max-w-[20rem] mx-auto bg-white rounded-lg overflow-hidden   ">
 
-              <p class="text-xl font-semibold">No bikes Available</p>
           </div>
       @endforelse
 

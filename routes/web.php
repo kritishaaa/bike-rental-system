@@ -12,6 +12,7 @@ use App\Http\Controllers\Renter\RenterController;
 use App\Models\Bike;
 use App\Models\Brand;
 use App\Models\Rent;
+use App\Models\Variant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,8 +30,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
 
     $brands = Brand::all();
+    $variants = Variant::all();
 
-    return view('home', compact('brands'));
+    return view('home', compact('brands', 'variants'));
 })->name('home');
 
 Route::get('/noaccess', function () {

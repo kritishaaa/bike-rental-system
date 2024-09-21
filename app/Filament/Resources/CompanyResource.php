@@ -4,21 +4,19 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BrandResource\Pages;
-use App\Models\Brand;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\TextInput;
+use App\Filament\Resources\CompanyResource\Pages;
+use App\Models\Company;
+use Filament\Forms;
 use Filament\Notifications\Notification;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 
-class BrandResource extends Resource
+class CompanyResource extends Resource
 {
-    protected static ?string $model = Brand::class;
+    protected static ?string $model = Company::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -26,10 +24,17 @@ class BrandResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('brand_name')
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(50),
+                Forms\Components\TextInput::make('address')
                     ->required()
                     ->maxLength(100),
-                FileUpload::make('brand_logo')
+                Forms\Components\TextInput::make('phonenumber')
+                    ->required()
+                    ->maxLength(50),
+                Forms\Components\Select::make('user_id')
+                    ->relationship('user', 'name') // Adjust based on your User model
                     ->required(),
             ]);
     }
@@ -38,8 +43,12 @@ class BrandResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('brand_logo')->height(35)->width(50),
-                TextColumn::make('brand_name')
+                TextColumn::make('name')->sortable()->searchable(),
+                TextColumn::make('address')->sortable()->searchable(),
+                TextColumn::make('phonenumber'),
+                TextColumn::make('phonenumber'),
+                TextColumn::make('user.name')
+                    ->label('Admin')
                     ->sortable()
                     ->searchable(),
 
@@ -55,8 +64,8 @@ class BrandResource extends Resource
                     ->successNotification(
                         Notification::make()
                             ->success()
-                            ->title('Brand deleted')
-                            ->body('The Brand has been deleted successfully.'),
+                            ->title('Company deleted')
+                            ->body('The Company has been deleted successfully.'),
                     ),
             ])
             ->bulkActions([
@@ -74,9 +83,9 @@ class BrandResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBrands::route('/'),
-            'create' => Pages\CreateBrand::route('/create'),
-            'edit' => Pages\EditBrand::route('/{record}/edit'),
+            'index' => Pages\ListCompanies::route('/'),
+            'create' => Pages\CreateCompany::route('/create'),
+            'edit' => Pages\EditCompany::route('/{record}/edit'),
         ];
     }
 }
