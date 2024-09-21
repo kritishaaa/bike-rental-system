@@ -1,23 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire;
 
 use App\Models\Bike;
-use App\Models\Brand;
-use App\Models\User;
-use App\Models\Variant;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class BikeCatalogue extends Component
 {
     use WithPagination;
-    public $brands, $priceorder, $ccs, $ccvalue, $min_cc, $max_cc, $brandInputs = [];
-    public $from_date, $to_date;
 
+    public $brands;
 
+    public $priceorder;
+
+    public $ccs;
+
+    public $ccvalue;
+
+    public $min_cc;
+
+    public $max_cc;
+
+    public $brandInputs = [];
+
+    public $from_date;
+
+    public $to_date;
 
     public function mount()
     {
@@ -30,9 +42,6 @@ class BikeCatalogue extends Component
         $this->from_date = $from_date->format('M-d');
         $this->to_date = $to_date->format('M-d');
     }
-
-
-
 
     public function render()
     {
@@ -50,20 +59,13 @@ class BikeCatalogue extends Component
                 $q1->orderBy('variant_rental_price', $this->priceorder);
             })->paginate(10);
 
-
-
         return view('livewire.bike-catalogue', compact('bikes'));
     }
 
     public function rentbike($id)
     {
 
-
-
         $bike = Bike::find($id);
-
-
-
 
         return redirect(route('renter.bikedetails'))->with(compact('bike'));
     }

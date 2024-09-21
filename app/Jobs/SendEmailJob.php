@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Jobs;
 
 use App\Mail\ObrsMail;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -29,6 +30,6 @@ class SendEmailJob implements ShouldQueue
     public function handle(): void
     {
         //
-        Mail::to('bipo_bca2076@lict.edu.np')->send(new ObrsMail());
+        Mail::to('bipo_bca2076@lict.edu.np')->send(new ObrsMail);
     }
 }

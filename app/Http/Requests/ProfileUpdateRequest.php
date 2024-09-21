@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use App\Models\User;
@@ -18,7 +20,7 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'name' => ['string', 'max:255'],
             'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
-            'license_number' => ['required', 'numeric', Rule::unique(User::class)->ignore($this->user()->license_number)]
+            'license_number' => ['required', 'numeric', Rule::unique(User::class)->ignore($this->user()->license_number)],
         ];
     }
 }

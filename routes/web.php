@@ -9,18 +9,11 @@ use App\Http\Controllers\Admin\VariantsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Renter\RenterController;
-use App\Jobs\SendEmailJob;
-use Illuminate\Http\Request;
-use App\Mail\ObrsMail;
+use App\Models\Bike;
 use App\Models\Brand;
 use App\Models\Rent;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SampleMail;
-use App\Mail\TicketMail;
-use App\Mail\WelcomeMail;
-use App\Models\Bike;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -36,25 +29,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
 
     $brands = Brand::all();
+
     return view('home', compact('brands'));
 })->name('home');
-
-
-
 
 Route::get('/noaccess', function () {
 
     return view('noaccess.noaccess');
 })->name('no-access');
 
-
-
 Route::middleware(['auth', 'isadmin', 'verified'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-
-
 
     Route::get('/bikes', [BikesController::class, 'index'])->name('bikes.index');
     Route::get('/bikes/create', [BikesController::class, 'create'])->name('bikes.create');
@@ -63,13 +49,11 @@ Route::middleware(['auth', 'isadmin', 'verified'])->group(function () {
     Route::post('/bikes/{id}/update', [BikesController::class, 'update'])->name('bikes.update');
     Route::post('/bikes/destroy', [BikesController::class, 'destroy'])->name('bikes.destroy');
 
-
     Route::get('/variants', [VariantsController::class, 'index'])->name('variants.index');
     Route::get('/variants/create', [VariantsController::class, 'create'])->name('variants.create');
     Route::post('/variants', [VariantsController::class, 'store'])->name('variants.store');
     Route::get('/variants/{id}/edit', [VariantsController::class, 'edit'])->name('variants.edit');
     Route::post('/variants/{id}/update', [VariantsController::class, 'update'])->name('variants.update');
-
 
     Route::resource('/rents', RentsController::class);
     Route::post('/getVariant', [RentsController::class, 'getVariant']);
@@ -83,14 +67,10 @@ Route::middleware(['auth', 'isadmin', 'verified'])->group(function () {
     Route::post('/brands/{id}/update', [BrandsController::class, 'update'])->name('brands.update');
     Route::post('/brands/destroy', [BrandsController::class, 'destroy'])->name('brands.destroy');
 
-
     Route::resource('company', CompanyController::class);
     Route::resource('analytics', AnalyticsController::class);
     Route::post('/changemonth', [AnalyticsController::class, 'changemonth']);
 });
-
-
-
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -99,32 +79,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/rentdetails', [RenterController::class, 'rentdetails'])->name('renter.rent.details');
     Route::post('/khaltirent', function (Request $request) {
 
-
-
-
         $rentbike = [
-            "rent_from_date" => session()->get('from_date'),
-            "rent_to_date" => session()->get('to_date'),
-            "rental_status" => "Pending",
-            "payment_method" => "Online",
+            'rent_from_date' => session()->get('from_date'),
+            'rent_to_date' => session()->get('to_date'),
+            'rental_status' => 'Pending',
+            'payment_method' => 'Online',
             'total_rental_price' => $request['data']['amount'],
-            "user_id" => auth()->user()->id
+            'user_id' => auth()->user()->id,
         ];
 
-
-
-
-
-
-
-        $args = http_build_query(array(
+        $args = http_build_query([
             'token' => $request['data']['token'],
-            'amount'  => $request['data']['amount']
-        ));
+            'amount' => $request['data']['amount'],
+        ]);
 
-        $url = "https://khalti.com/api/v2/payment/verify/";
+        $url = 'https://khalti.com/api/v2/payment/verify/';
 
-        # Make the call using API.
+        // Make the call using API.
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -139,11 +110,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-
-
-
-
-
         if ($status_code == 200) {
 
             $bike_id = Bike::where('number_plate', '=', $request['data']['product_identity'])->first();
@@ -153,6 +119,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Rent::create($rentbike);
 
             session()->flash('success', 'Rent Request is Succesfully Send and Online payment Successful');
+
             return response()->json(['success' => 1, 'redirectto' => route('renter.rent.details')]);
         } else {
             return response()->json(['error' => 1, 'message' => 'Payment Failed']);
@@ -161,28 +128,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // $bike['status'] = "On Rent";
         // Bike::find($this->bike->id)->update($bike);
 
-
         // return response()->json($request->toArray());
     })->name('khaltirent');
 });
 
-
 Route::get('/test', function () {
-
 
     $rent = Rent::find(5);
     $rent->id = 5;
     $rentalbike = Rent::find(5);
 
-
-
     // return view('frontend.partials.rentalticket',compact('rentalbike','rent'));
 });
 
 // Auth::routes(['verify' => true]);
-
-
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -190,4 +149,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

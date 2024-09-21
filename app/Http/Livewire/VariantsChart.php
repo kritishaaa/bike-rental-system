@@ -1,24 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire;
 
 use App\Models\Bike;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-use App\Http\Livewire\AnalyticsCharts;
 
 class VariantsChart extends Component
 {
-    public $idvalue, $variant_counts, $variant_names, $demo;
+    public $idvalue;
 
-    public $getmonth, $month;
+    public $variant_counts;
+
+    public $variant_names;
+
+    public $demo;
+
+    public $getmonth;
+
+    public $month;
+
     public function mount()
     {
 
-
         $this->month = date('Y-m');
-
 
         $results = Bike::join('variants', 'bikes.variant_id', '=', 'variants.id')
             ->join('rents', 'bikes.id', '=', 'rents.bike_id')
@@ -30,10 +37,8 @@ class VariantsChart extends Component
         $this->variant_names = $results->pluck('variant_name');
     }
 
-
     public function render()
     {
-
 
         return view('livewire.variants-chart');
     }

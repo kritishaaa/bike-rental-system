@@ -1,16 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Bike;
-use App\Models\Bikes;
 use App\Models\Brand;
 use App\Models\Rent;
 use App\Models\User;
 use App\Models\Variant;
-use App\Models\Variants;
 use Carbon\Carbon;
-
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -28,7 +27,6 @@ class DashboardController extends Controller
         $registeredrents = Rent::count();
         $rents = Rent::count();
         $renters = User::where('role', 'renter')->count();
-
 
         // $first_row_rent=Rent::first()->value('rent_from_date');
         //   $last_row_rent=Rent::latest('id')->value('rent_to_date');
@@ -50,12 +48,9 @@ class DashboardController extends Controller
             $j++;
         }
 
-
         // $dateCounts=collect($dateCounts)->paginate(5);
 
         $counts = compact('brands', 'variants', 'bikes', 'bikecounts', 'dates', 'newrents', 'registeredrents', 'rents', 'renters');
-
-
 
         return view('Admin.dashboard')->with($counts);
     }

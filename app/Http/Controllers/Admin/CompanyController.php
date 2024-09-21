@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -32,8 +34,6 @@ class CompanyController extends Controller
         //
         $company = $request->toArray();
         $company['user_id'] = auth()->user()->id;
-
-
 
         return view('Admin.Bikes.index');
     }

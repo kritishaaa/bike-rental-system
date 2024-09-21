@@ -1,15 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Mail;
 
 use App\Models\Rent;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use PhpParser\Node\Expr\Cast\Object_;
 
 class RentalStatusMail extends Mailable
 {
@@ -19,6 +19,7 @@ class RentalStatusMail extends Mailable
      * Create a new message instance.
      */
     public $rent;
+
     public function __construct(Rent $rent)
     {
         //

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\Components;
 
 use App\Models\Bike;
@@ -14,7 +16,10 @@ class BikeCard extends Component
     /**
      * Create a new component instance.
      */
-    public $bikes, $trending_bikes;
+    public $bikes;
+
+    public $trending_bikes;
+
     public function __construct()
     {
 

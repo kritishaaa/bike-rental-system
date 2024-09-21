@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -18,8 +20,6 @@ class VariantsController extends Controller
         //
         $variants = Variant::all();
 
-
-
         return view('Admin.Variants.index')->with(compact('variants'));
     }
 
@@ -30,6 +30,7 @@ class VariantsController extends Controller
     {
         //
         $brands = Brand::all();
+
         return view('Admin.Variants.create')->with(compact('brands'));
     }
 
@@ -43,25 +44,24 @@ class VariantsController extends Controller
         $request->validate([
             'variant_name' => 'required|unique:variants,variant_name',
             'variant_rental_price' => 'required|numeric|min:100',
-            'variant_image' => 'required|image|mimes:png,jpg|max:512'
+            'variant_image' => 'required|image|mimes:png,jpg|max:512',
 
         ]);
 
         $path = Storage::disk('public')->put('variant_images', $request->file('variant_image'));
-        $path = str_replace('variant_images/', "", $path);
+        $path = str_replace('variant_images/', '', $path);
 
         $data = [
             'variant_name' => $request['variant_name'],
             'variant_rental_price' => $request['variant_rental_price'],
             'brand_id' => $request['brand'],
-            'variant_image' => $path
+            'variant_image' => $path,
         ];
 
         Variant::create($data);
 
-
         $variants = Variant::all();
-        $success = "Created new variant successfully";
+        $success = 'Created new variant successfully';
 
         return redirect(route('Variants.index'))->with('success', $success);
     }
@@ -81,9 +81,9 @@ class VariantsController extends Controller
     {
         //
 
-
         $variant = Variant::find($id);
         $brands = Brand::all();
+
         return view('Admin.Variants.edit')->with(compact('id', 'variant', 'brands'));
     }
 
@@ -96,24 +96,22 @@ class VariantsController extends Controller
         $request->validate([
             'variant_name' => 'required|unique:variants,variant_name,' . $id . 'id',
             'variant_rental_price' => 'required|numeric|min:100',
-            'variant_image' => 'nullable|image|mimes:png,jpg|max:512'
+            'variant_image' => 'nullable|image|mimes:png,jpg|max:512',
 
         ]);
 
         $data = [
             'variant_name' => $request['variant_name'],
             'variant_rental_price' => $request['variant_rental_price'],
-            'brand_id' => $request['brand']
+            'brand_id' => $request['brand'],
 
         ];
-
-
 
         Variant::find($id)->update($data);
 
         $variant = Variant::find($id);
 
-        if (!is_null($request->file('variant_image')) && !is_null($variant['variant_image'])) {
+        if (! is_null($request->file('variant_image')) && ! is_null($variant['variant_image'])) {
 
             Storage::disk('public')->delete('variant_images/' . $variant['variant_image']);
 
@@ -122,10 +120,7 @@ class VariantsController extends Controller
             Variant::find($id)->update(['variant_image' => $path]);
         }
 
-
-
-
-        $success = "Updated Variant successfully";
+        $success = 'Updated Variant successfully';
 
         return redirect(route('Admin.Variants.index'))->with('success', $success);
     }

@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Observers;
 
 use App\Jobs\RentJob;
 use App\Mail\RentalStatusMail;
-use App\Mail\TicketMail;
 use App\Models\Rent;
 use Illuminate\Support\Facades\Mail;
 
@@ -16,7 +17,6 @@ class RentObserver
     public function created(Rent $rent): void
     {
         //
-
 
         dispatch(new RentJob($rent->id));
     }

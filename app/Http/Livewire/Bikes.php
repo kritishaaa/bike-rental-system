@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire;
 
 use App\Models\Bike;
@@ -24,7 +26,7 @@ class Bikes extends Component
 
             $this->billbookdialog = 'show';
             $bike = Bike::find($id);
-            $this->image_url = 'storage/bike_images/'.$bike['billbook'];
+            $this->image_url = 'storage/bike_images/' . $bike['billbook'];
 
         } else {
 

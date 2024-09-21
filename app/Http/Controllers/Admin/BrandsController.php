@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -52,6 +54,7 @@ class BrandsController extends Controller
         $brands = Brand::all();
         $brands = $brands->toArray();
         $success = 'Successfully Created New Brand';
+
         // return view('admin.brands.index')->with(compact('brands','success'));
         return redirect(route('Admin.Brands.index'))->with('success', $success);
     }
@@ -83,7 +86,7 @@ class BrandsController extends Controller
         //
 
         $request->validate([
-            'brand_name' => 'required|unique:brands,brand_name,'.$id.',id',
+            'brand_name' => 'required|unique:brands,brand_name,' . $id . ',id',
             'brand_logo' => 'sometimes|max:512|image',
         ]);
         $data = [

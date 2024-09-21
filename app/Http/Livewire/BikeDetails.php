@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire;
 
 use App\Models\Bike;
@@ -41,7 +43,7 @@ class BikeDetails extends Component
     {
 
         $bike = Bike::find($this->bike['id']);
-        $this->image_url = 'storage/bike_images/'.$bike['billbook'];
+        $this->image_url = 'storage/bike_images/' . $bike['billbook'];
 
         $this->from_date = Carbon::parse(session()->get('from_date'));
         $this->to_date = Carbon::parse(session()->get('to_date'));

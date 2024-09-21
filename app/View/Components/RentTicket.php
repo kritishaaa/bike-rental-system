@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\Components;
 
 use App\Models\Rent;
@@ -12,7 +14,10 @@ class RentTicket extends Component
     /**
      * Create a new component instance.
      */
-    public $rent, $rentalbike;
+    public $rent;
+
+    public $rentalbike;
+
     public function __construct()
     {
         //

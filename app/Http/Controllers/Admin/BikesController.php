@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -8,7 +10,6 @@ use App\Models\Brand;
 use App\Models\Variant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
 
 class BikesController extends Controller
 {
@@ -18,9 +19,6 @@ class BikesController extends Controller
     public function index()
     {
         //
-
-
-
 
         return view('Admin.Bikes.index');
     }
@@ -32,6 +30,7 @@ class BikesController extends Controller
     {
         //
         $variants = Variant::all();
+
         return view('Admin.Bikes.create')->with(compact('variants'));
     }
 
@@ -57,11 +56,12 @@ class BikesController extends Controller
             'variant_id' => $request['variant'],
             'status' => $request['status'],
             'model_year' => $request['model_year'],
-            'billbook' => $path
+            'billbook' => $path,
         ];
 
         Bike::create($data);
-        $success = "New Bike Added Successfully";
+        $success = 'New Bike Added Successfully';
+
         return redirect(route('bikes.index'))->with('success', $success);
     }
 
@@ -97,28 +97,22 @@ class BikesController extends Controller
             'cc' => 'required',
             'status' => 'required',
             'variant' => 'required',
-            'billbook' => 'nullable|image'
+            'billbook' => 'nullable|image',
         ]);
 
-
-
         $bike = Bike::find($id);
-
 
         $data = [
             'number_plate' => $request['number_plate'],
             'cc' => $request['cc'],
             'variant_id' => $request['variant'],
             'status' => $request['status'],
-            'model_year' => $request['model_year']
+            'model_year' => $request['model_year'],
         ];
 
+        $file = (array) $request->file('billbook');
 
-
-        $file = (array)$request->file('billbook');
-
-        if (!empty($file)) {
-
+        if (! empty($file)) {
 
             $path = Storage::disk('public')->put('bike_images', $request->file('billbook'));
             Storage::disk('public')->delete('bike_images/' . $bike['billbook']);

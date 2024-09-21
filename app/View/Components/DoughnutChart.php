@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\Components;
 
 use App\Models\Rent;
@@ -9,19 +11,28 @@ use Illuminate\View\Component;
 
 class DoughnutChart extends Component
 {
-    public $idvalue, $creditcount, $cashcount, $onlinecount, $totalcounts, $counts = [], $month;
+    public $idvalue;
+
+    public $creditcount;
+
+    public $cashcount;
+
+    public $onlinecount;
+
+    public $totalcounts;
+
+    public $counts = [];
+
+    public $month;
 
     /**
      * Create a new component instance.
      */
-
-
-
     public function __construct($idvalue, $month)
     {
         //
         $this->month = $month;
-        $revenve = Rent::where('rents.created_at', 'LIKE', "$month%")->get();
+        $revenve = Rent::where('rents.created_at', 'LIKE', "{$month}%")->get();
         $this->creditcount = $revenve->where('payment_method', '=', 'Credit')->sum('total_rental_price');
         $this->onlinecount = $revenve->where('payment_method', '=', 'Online')->sum('total_rental_price');
         $this->cashcount = $revenve->where('payment_method', '=', 'Cash on Hand')->sum('total_rental_price');

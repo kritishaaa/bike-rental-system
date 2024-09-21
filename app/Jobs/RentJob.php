@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Jobs;
 
 use App\Mail\TicketMail;
 use App\Models\Rent;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -20,6 +21,7 @@ class RentJob implements ShouldQueue
      * Create a new job instance.
      */
     protected $rent;
+
     public function __construct($id)
     {
         //
@@ -32,7 +34,6 @@ class RentJob implements ShouldQueue
     public function handle(): void
     {
         //
-
 
         Mail::to($this->rent->user->email)->send(new TicketMail($this->rent->id));
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire;
 
 use App\Models\Bike;
@@ -10,17 +12,26 @@ use Livewire\WithPagination;
 class RentDetails extends Component
 {
     use WithPagination;
-    public $tickettoogle = "hide", $i_id, $rentalbike, $rentalstatus, $paymentmethod;
-    public $bikesinputs = [];
 
+    public $tickettoogle = 'hide';
+
+    public $i_id;
+
+    public $rentalbike;
+
+    public $rentalstatus;
+
+    public $paymentmethod;
+
+    public $bikesinputs = [];
 
     public function tickettoogle($id)
     {
 
-        if ($this->tickettoogle == "show") {
-            $this->tickettoogle = "hide";
-        } elseif ($this->tickettoogle == "hide") {
-            $this->tickettoogle = "show";
+        if ($this->tickettoogle == 'show') {
+            $this->tickettoogle = 'hide';
+        } elseif ($this->tickettoogle == 'hide') {
+            $this->tickettoogle = 'show';
             $this->i_id = $id;
             $this->rentalbike = Rent::find($id);
         }

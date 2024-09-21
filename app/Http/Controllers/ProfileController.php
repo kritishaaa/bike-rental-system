@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
@@ -16,7 +18,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        if (auth()->user()->role == "admin") {
+        if (auth()->user()->role == 'admin') {
             return view('profile.edit', [
                 'user' => $request->user(),
             ]);

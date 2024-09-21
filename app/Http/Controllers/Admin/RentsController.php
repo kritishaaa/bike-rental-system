@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -27,7 +29,7 @@ class RentsController extends Controller
     /*
     Disable date return
 
-    */
+     */
 
     public function rented_dates($from_date, $to_date)
     {
