@@ -18,7 +18,7 @@ class BrandsController extends Controller
         $brands = Brand::all();
         $brands = $brands->toArray();
 
-        return view('admin.brands.index')->with(compact('brands'));
+        return view('Admin.Brands.index')->with(compact('brands'));
     }
 
     /**
@@ -27,7 +27,7 @@ class BrandsController extends Controller
     public function create()
     {
         //
-        return view('admin.brands.create');
+        return view('Admin.Brands.create');
     }
 
     /**
@@ -53,7 +53,7 @@ class BrandsController extends Controller
         $brands = $brands->toArray();
         $success = 'Successfully Created New Brand';
         // return view('admin.brands.index')->with(compact('brands','success'));
-        return redirect(route('brands.index'))->with('success', $success);
+        return redirect(route('Admin.Brands.index'))->with('success', $success);
     }
 
     /**
@@ -72,7 +72,7 @@ class BrandsController extends Controller
         //
         $brand = Brand::find($id);
 
-        return view('admin.brands.edit')->with(compact('brand'));
+        return view('Admin.Brands.edit')->with(compact('brand'));
     }
 
     /**
@@ -98,7 +98,7 @@ class BrandsController extends Controller
             Brand::find($id)->update(['brand_logo' => $path]);
         }
 
-        return redirect(route('brands.index'));
+        return redirect(route('Admin.Brands.index'));
     }
 
     /**
@@ -111,6 +111,6 @@ class BrandsController extends Controller
         Storage::disk('public')->delete($brand['brand_logo']);
         $brand->delete();
 
-        return redirect(route('brands.index'))->with('success', 'Brand Deleted Successfully');
+        return redirect(route('Admin.Brands.index'))->with('success', 'Brand Deleted Successfully');
     }
 }

@@ -22,7 +22,7 @@ class BikesController extends Controller
 
 
 
-        return view('admin.bikes.index');
+        return view('Admin.Bikes.index');
     }
 
     /**
@@ -32,7 +32,7 @@ class BikesController extends Controller
     {
         //
         $variants = Variant::all();
-        return view('admin.bikes.create')->with(compact('variants'));
+        return view('Admin.Bikes.create')->with(compact('variants'));
     }
 
     /**
@@ -83,7 +83,7 @@ class BikesController extends Controller
         $bike = Bike::find($id);
         // $bikes = Variants::join('bike', 'variants.id', '=', 'bikes.variants_id')->join('brands','brands.id','=','variants.brand_id')->get();
 
-        return view('admin.bikes.edit')->with(compact('variants', 'bike'));
+        return view('Admin.Bikes.edit')->with(compact('variants', 'bike'));
     }
 
     /**
@@ -128,7 +128,7 @@ class BikesController extends Controller
         }
         Bike::find($id)->update($data);
 
-        return redirect(route('bikes.index'))->with('success', 'Bike Details Updated Successfully');
+        return redirect(route('Bikes.index'))->with('success', 'Bike Details Updated Successfully');
     }
 
     /**
@@ -141,6 +141,6 @@ class BikesController extends Controller
         $bike = Bike::find($bike_id);
         $bike->delete();
 
-        return redirect(route('bikes.index'))->with('success', 'Bike Detail Deleted Successfully');
+        return redirect(route('Bikes.index'))->with('success', 'Bike Detail Deleted Successfully');
     }
 }

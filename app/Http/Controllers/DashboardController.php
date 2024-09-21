@@ -57,6 +57,6 @@ class DashboardController extends Controller
 
 
 
-        return view('admin.dashboard')->with($counts);
+        return view('Admin.dashboard')->with($counts);
     }
 }

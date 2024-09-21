@@ -21,7 +21,7 @@ class RentsController extends Controller
     {
         //
 
-        return view('admin.rents.index');
+        return view('Admin.Rents.index');
     }
 
     /*
@@ -52,7 +52,7 @@ class RentsController extends Controller
 
         $brands = Brand::all();
 
-        return view('admin.rents.create', compact('brands'));
+        return view('Admin.Rents.create', compact('brands'));
     }
 
     public function getVariant(Request $request)

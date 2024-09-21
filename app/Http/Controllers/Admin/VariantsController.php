@@ -20,7 +20,7 @@ class VariantsController extends Controller
 
 
 
-        return view('admin.variants.index')->with(compact('variants'));
+        return view('Admin.Variants.index')->with(compact('variants'));
     }
 
     /**
@@ -30,7 +30,7 @@ class VariantsController extends Controller
     {
         //
         $brands = Brand::all();
-        return view('admin.variants.create')->with(compact('brands'));
+        return view('Admin.Variants.create')->with(compact('brands'));
     }
 
     /**
@@ -63,7 +63,7 @@ class VariantsController extends Controller
         $variants = Variant::all();
         $success = "Created new variant successfully";
 
-        return redirect(route('variants.index'))->with('success', $success);
+        return redirect(route('Variants.index'))->with('success', $success);
     }
 
     /**
@@ -84,7 +84,7 @@ class VariantsController extends Controller
 
         $variant = Variant::find($id);
         $brands = Brand::all();
-        return view('admin.variants.edit')->with(compact('id', 'variant', 'brands'));
+        return view('Admin.Variants.edit')->with(compact('id', 'variant', 'brands'));
     }
 
     /**
@@ -127,7 +127,7 @@ class VariantsController extends Controller
 
         $success = "Updated Variant successfully";
 
-        return redirect(route('variants.index'))->with('success', $success);
+        return redirect(route('Admin.Variants.index'))->with('success', $success);
     }
 
     /**
