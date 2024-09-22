@@ -38,7 +38,7 @@
        
       <tr>
          <td>{{$sn++}}</td>
-         <td><img src="{{ asset('storage/variant_images/'.$variant['variant_image']) }}" alt="variantlogo" style="object-fit: cover" class="h-20"></td>
+         <td><img src="{{ asset('storage/'.$variant['variant_image']) }}" alt="variantlogo" style="object-fit: cover" class="h-20"></td>
          <td>{{ $variant['variant_name']}}</td>
          <td>{{ $variant->brand->brand_name}}</td>
          <td>{{ $variant['variant_rental_price']}}</td>

@@ -48,8 +48,8 @@ class VariantsController extends Controller
 
         ]);
 
-        $path = Storage::disk('public')->put('variant_images', $request->file('variant_image'));
-        $path = str_replace('variant_images/', '', $path);
+        $path = Storage::disk('public')->put('', $request->file('variant_image'));
+        $path = str_replace('/', '', $path);
 
         $data = [
             'variant_name' => $request['variant_name'],
@@ -113,10 +113,10 @@ class VariantsController extends Controller
 
         if (! is_null($request->file('variant_image')) && ! is_null($variant['variant_image'])) {
 
-            Storage::disk('public')->delete('variant_images/' . $variant['variant_image']);
+            Storage::disk('public')->delete('/' . $variant['variant_image']);
 
-            $path = Storage::disk('public')->put('variant_images', $request->file('variant_image'));
-            $path = str_replace('variant_images/', '', $path);
+            $path = Storage::disk('public')->put('/', $request->file('variant_image'));
+            $path = str_replace('/', '', $path);
             Variant::find($id)->update(['variant_image' => $path]);
         }
 

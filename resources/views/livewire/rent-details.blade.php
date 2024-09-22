@@ -146,7 +146,7 @@
                         <p>Renter Name: {{ $rentalbike->user->name }}</p>
                         <p>Booked on : {{ $rentalbike->created_at->format('Y-m-d') }}</p>
                         <p class="font-semibold text-md">Rental Number : {{ $rentalbike->rental_number }}</p>
-                        <img src="{{ asset('storage/variant_images/' . $rentalbike->bike->variant->variant_image) }}"
+                        <img src="{{ asset('storage/' . $rentalbike->bike->variant->variant_image) }}"
                             alt="image" class="h-52 object-cover border-0.5 border-black rounded scale-75">
                     </div>
 

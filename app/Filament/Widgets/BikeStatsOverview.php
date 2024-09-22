@@ -15,7 +15,7 @@ class BikeStatsOverview extends BaseWidget
     {
         return [
             Card::make('Total Bikes', Bike::count())
-                ->description('Active User: '.Bike::where('status', 'available')->count())
+                ->description('Active Bikes: '.Bike::where('status', 'available')->count())
                 ->color('success'),
             Card::make('Total Brands', Brand::count())
                 ->color('success'),

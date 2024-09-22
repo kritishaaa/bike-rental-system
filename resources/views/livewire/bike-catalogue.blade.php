@@ -63,8 +63,8 @@
                 <div
                     class="max-w-[20rem] mx-auto bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:scale-110  ">
                     <img style="width: 250px; height: 200px;object-fit: contain"
-                        src="{{ asset('storage/variant_images/' . $bike->variant->variant_image) }}"
-                        alt="{{ asset('storage/variant_images/' . $bike->variant->variant_name) }}">
+                        src="{{ asset('storage/' . $bike->variant->variant_image) }}"
+                        alt="{{ asset('storage/' . $bike->variant->variant_name) }}">
                     <div class="p-4">
                         <h2 class="text-xl font-semibold text-gray-800">{{ $bike->variant->variant_name }}</h2>
                         <p class="mt-1">

@@ -20,7 +20,7 @@
 
                     <div>
 
-                        <img src="{{ 'storage/variant_images/' . $bike->variant->variant_image }}" alt=""
+                        <img src="{{ 'storage/' . $bike->variant->variant_image }}" alt=""
                             class="w-[350px] h-[300px] object-cover">
 
                         <div class="flex flex-row gap-4 justify-center">
@@ -135,7 +135,7 @@
                             @forelse ($recommendedbikes as $rbike)
                                 <div class="flex flex-row gap-3 border-2 w-60 rounded">
                                     <div>
-                                        <img src="{{ asset('storage/variant_images/' . $rbike->variant->variant_image) }}"
+                                        <img src="{{ asset('storage/' . $rbike->variant->variant_image) }}"
                                             alt="image" class="w-[100px] h-[180px] object-contain">
 
                                     </div>
