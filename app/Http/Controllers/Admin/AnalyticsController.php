@@ -17,7 +17,6 @@ class AnalyticsController extends Controller
      */
     public function index()
     {
-        //
         $bikecounts = $this->bikes('2023-06');
 
         return view('Admin.Analytics.index', compact('bikecounts'));
