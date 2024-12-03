@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         // $company = Company::first();
-        view()->share('companyname', 'Bike Rental');
+        view()->share('companyname', 'RideFlex');
         view()->share('companyaddress', 'Kathmandu');
         view()->share('companyphonenumber', '9840839292');
 

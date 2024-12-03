@@ -87,9 +87,12 @@
                             <td class="text-center"> {{ $status }}</td>
                             <td>
 
+                                {{-- <button class="bg-blue-500 text-xs text-white px-2 py-[1px] min-w-fit rounded block"
+                                    title="Click here to switch payment mode to paid"
+                                    wire:click="tooglerentdialog({{ $rent['id'] }})">Change status</button> --}}
                                 <button class="bg-blue-500 text-xs text-white px-2 py-[1px] min-w-fit rounded block"
                                     title="Click here to switch payment mode to paid"
-                                    wire:click="tooglerentdialog({{ $rent['id'] }})">Change status</button>
+                                    wire:click="tooglerentdialog({{ $rent['id'] }})">View Details</button>
 
 
                                 {{--                
@@ -122,76 +125,74 @@
 
 
             <div class="bg-white rounded shadow-md shadow-slate-700 p-4 relative {{ $display }}">
-                <button wire:click="tooglerentdialog(2)"> <i
-                        class="fa fa-times hover:bg-black hover:text-white p-1 rounded-full absolute top-2 right-2"
-                        aria-hidden="true"></i>
+                <button wire:click="tooglerentdialog(2)">
+                    <i class="fa fa-times hover:bg-black hover:text-white p-1 rounded-full absolute top-2 right-2" aria-hidden="true"></i>
                 </button>
-
+            
                 <h2 class="text-xl font-semibold mt-4 p-3 rounded-sm">Rental Transaction Information</h2>
                 <hr class="h-0.5 bg-black">
+                <p class="my-3">Renter: {{ $user->name }}</p>
                 <p class="my-3">Rental Number: {{ $rent1->rental_number }}</p>
                 <p class="my-3">Rental Status: {{ $rent1->rental_status }}</p>
                 <form wire:submit.prevent="saverentaltransaction">
-
+            
                     <div class="flex flex-col gap-3 mt-4">
-
-                        <div class=" grid grid-cols-2 content-center items-center gap-2">
-
+            
+                        <div class="grid grid-cols-2 content-center items-center gap-2">
                             <div class="flex flex-col align-middle gap-4 justify-center">
                                 <label for="">Payment Method</label>
                                 @if ($rentalpayments['payment_method'] != 'Credit')
                                     <label for="">Rental Status</label>
-                                    <label for="" class=" {{ $refundclass }} ">Refund Amount <br>
+                                    <label for="" class=" {{ $refundclass }}">Refund Amount <br>
                                         <center><small>(Optional)</small></center>
                                     </label>
+                                    <label for="">Deposit Document</label>
                                 @endif
                             </div>
                             <div class="flex flex-col justify-center gap-2">
-                                <select name="" id="" class="rounded scale-90"
-                                    wire:model.lazy="rentalpayments.payment_method">
-
-                                    {{-- {{-- <option @if ($rent1->status == 'Payment Pending') selected @endif   value="Payment Pending">Payment Pending</option> --}}
-                                    <option @if ($rent1->payment_method == 'Credit') selected @endif value="Credit">Credit
-                                    </option>
-                                    <option @if ($rent1->payment_method == 'Cash on Hand') selected @endif value="Cash on Hand">Cash
-                                        on
-                                        Hand</option>
-                                    <option @if ($rent1->payment_method == 'Online') selected @endif value="Online">Online
-                                    </option>
+                                <select name="" id="" class="rounded scale-90" wire:model.lazy="rentalpayments.payment_method">
+                                    <option @if ($rent1->payment_method == 'Credit') selected @endif value="Credit">Credit</option>
+                                    <option @if ($rent1->payment_method == 'Cash on Hand') selected @endif value="Cash on Hand">Cash on Hand</option>
+                                    <option @if ($rent1->payment_method == 'Online') selected @endif value="Online">Online</option>
                                 </select>
-
+            
                                 @if ($rentalpayments['payment_method'] != 'Credit')
-                                    <select name="" id="" class="rounded scale-90"
-                                        wire:model.lazy="rentalpayments.rental_status">
-                                        <option @if ($rent1->rental_status == 'Pending') selected @endif value="Pending">
-                                            Pending</option>
-                                        <option @if ($rent1->rental_status == 'Approved') selected @endif value="Approved">
-                                            Approve on Rent</option>
-                                        <option @if ($rent1->rental_status == 'Marked_as_return') selected @endif
-                                            value="Marked_as_return">Mark as Return</option>
-                                        <option @if ($rent1->rental_status == 'Reject') selected @endif value="Reject">Reject
-                                        </option>
+                                    <select name="" id="" class="rounded scale-90" wire:model.lazy="rentalpayments.rental_status">
+                                        <option @if ($rent1->rental_status == 'Pending') selected @endif value="Pending">Pending</option>
+                                        <option @if ($rent1->rental_status == 'Approved') selected @endif value="Approved">Approve for Rent</option>
+                                        <option @if ($rent1->rental_status == 'On Rent') selected @endif value="On Rent">On Rent</option>
+                                        <option @if ($rent1->rental_status == 'Marked_as_return') selected @endif value="Marked_as_return">Mark as Return</option>
+                                        <option @if ($rent1->rental_status == 'Reject') selected @endif value="Reject">Reject</option>
                                     </select>
-                                    <input type="number" placeholder="Refund Amount" wire:model="rentalpayments.refund"
-                                        class="rounded scale-90 {{ $refundclass }}">
+            
+                                    <input type="number" placeholder="Refund Amount" wire:model="rentalpayments.refund" class="rounded scale-90 {{ $refundclass }}">
+                                    @if($rent1->rental_status == 'Approved')
+                                    <input type="text" placeholder="Deposit Document Name (e.g., Citizenship, National ID)"
+                                        wire:model="rentalpayments.deposit_document_name" class="rounded scale-90">
+                                    @endif
+        
                                 @endif
+
+                                
                             </div>
-
                         </div>
-
-
+            
                         <button class="text-white py-1 rounded bg-black" wire:loading.attr="disabled">
                             <i class="animate-spin fa fa-spinner" aria-hidden="true" wire:loading></i>
-
                             Save
                         </button>
-
-
                     </div>
-
                 </form>
             </div>
-
+            
         </div>
     @endif
 </div>
+
+@script
+<script>
+    $wire.on('language-change', () => {
+        window.location.reload();
+    });
+</script>
+@endscript

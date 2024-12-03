@@ -15,8 +15,8 @@
         var k = 0;
 
         for (var i = 0; i < Math.ceil(dates.length / sublength); i++) {
-            sub_dates_array[i] = []; // Create an empty array for each dates sub array
-            sub_bikecounts_array[i] = []; // Create an empty array for each dates sub array
+            sub_dates_array[i] = []; 
+            sub_bikecounts_array[i] = [];
 
             for (var j = 0; j < sublength; j++) {
                 if (k > dates.length) {
@@ -109,14 +109,6 @@
         var bikechart = document.getElementById("myChart");
 
 
-
-
-
-
-
-
-
-
         const ctx = document.getElementById("myChart");
 
         var chart = new Chart(ctx, {
@@ -145,13 +137,10 @@
         function prev() {
             postion = postion - 1;
 
-
-
             if (postion < -1) {
                 postion = sub_dates_array.length - 1;
 
             }
-
 
             chart.data.datasets[0].data = sub_bikecounts_array[postion];
             chart.data.labels = sub_dates_array[postion];
@@ -159,7 +148,6 @@
             console.log(postion);
 
         }
-
 
         function next() {
             postion = postion + 1;
@@ -169,14 +157,9 @@
 
             }
 
-
             chart.data.datasets[0].data = sub_bikecounts_array[postion];
             chart.data.labels = sub_dates_array[postion];
             chart.update();
-
-
-
-
         }
         p = 0;
 
@@ -192,7 +175,6 @@
 
 
         }
-
 
 
         function convert_subarrays(sublength) {

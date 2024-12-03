@@ -122,7 +122,7 @@ class BikesController extends Controller
         }
         Bike::find($id)->update($data);
 
-        return redirect(route('Bikes.index'))->with('success', 'Bike Details Updated Successfully');
+        return redirect(route('bikes.index'))->with('success', 'Bike Details Updated Successfully');
     }
 
     /**

@@ -98,6 +98,7 @@ class RentsController extends Controller
             'email' => ['required', 'email', new EmailNotFound],
             'from_date' => 'required|date',
             'to_date' => 'required|date',
+            'deposit_document_name' => 'required'
         ]);
 
         $variants = Variant::find($request->variant);
@@ -108,17 +109,18 @@ class RentsController extends Controller
         $rental_days = $to_date->diffInDays($from_date);
         $total_rental_price = $variants['variant_rental_price'] * $rental_days;
 
-        $user = User::all()->where('email', '=', $request->email)[0];
+        $user = User::where('email',  $request->email)->first();
 
         $data = [
             'rent_from_date' => $request->from_date,
             'rent_to_date' => $request->to_date,
-            'rental_status' => 'Approved',
+            'rental_status' => 'On Rent',
             'total_rental_price' => $total_rental_price,
             'rental_number' => uniqid(),
             'payment_method' => 'Cash on Hand',
             'bike_id' => $request->bike,
             'user_id' => $user->id,
+            'deposit_document_name' =>$request->deposit_document_name
         ];
 
         $bike['status'] = 'On Rent';

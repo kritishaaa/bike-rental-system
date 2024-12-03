@@ -134,6 +134,13 @@
                         value="{{ old('email') }}">
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
+                <div class="p-2">
+                    <label for="deposit_document_name" class="font-bold">Deposit Document </label>
+                    <input type="text" name="deposit_document_name" id="deposit_document_name"
+                        class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                        value="{{ old('deposit_document_name') }}">
+                    <x-input-error :messages="$errors->get('text')" class="mt-2" />
+                </div>
 
 
                 <div>
@@ -157,13 +164,13 @@
             <div class="grid grid-cols-2 justify-items-stretch">
                 <div>
                     <p class="text-sm">Rent price per Day: </p>
-                    <p class="text-sm">Rental Days: </p>
+                    {{-- <p class="text-sm">Rental Days: </p> --}}
 
 
                 </div>
                 <div class="flex flex-col items-end">
                     <p class="text-sm" id="rental_perday_price">---</p>
-                    <p class="text-sm" id="rental_dates">---</p>
+                    {{-- <p class="text-sm" id="rental_dates">---</p> --}}
 
 
                 </div>

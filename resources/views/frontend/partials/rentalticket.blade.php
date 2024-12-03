@@ -25,7 +25,7 @@
       
   <div class="fixed top-0  left-0 min-h-full p-7 w-screen flex justify-center items-center backdrop-blur-sm ">
     <div class="bg-white  text-md overflow-hidden p-4 rounded relative hover:scale-110 border-slate-500 border-[1px]">
-        <h2 class="font-medium text-xl">Bike Rental Ticket</h2>
+        <h2 class="font-medium text-xl"> RideFlex Ticket</h2>
         <hr class="bg-black h-0.5">
      
         <div class="text-sm text-center">

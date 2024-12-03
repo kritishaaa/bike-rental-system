@@ -56,7 +56,7 @@ class BrandsController extends Controller
         $success = 'Successfully Created New Brand';
 
         // return view('admin.brands.index')->with(compact('brands','success'));
-        return redirect(route('Admin.Brands.index'))->with('success', $success);
+        return redirect(route('brands.index'))->with('success', $success);
     }
 
     /**
@@ -101,7 +101,7 @@ class BrandsController extends Controller
             Brand::find($id)->update(['brand_logo' => $path]);
         }
 
-        return redirect(route('Admin.Brands.index'));
+        return redirect(route('brands.index'));
     }
 
     /**

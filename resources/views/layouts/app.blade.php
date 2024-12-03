@@ -68,8 +68,8 @@
                     class="hover:bg-gray-400 p-2  border-b-2 border-b-gray-200">Bikes</a>
                 <a href="{{ route('rents.index') }}"
                     class="hover:bg-gray-400 p-2  border-b-2 border-b-gray-200">Rents</a>
-                <a href="{{ route('analytics.index') }}"
-                    class="hover:bg-gray-400 p-2  border-b-2 border-b-gray-200">Analytics</a>
+                {{-- <a href="{{ route('analytics.index') }}"
+                    class="hover:bg-gray-400 p-2  border-b-2 border-b-gray-200">Analytics</a> --}}
                 <a href="{{ route('company.index') }}"
                     class="hover:bg-gray-400 p-2  border-b-2 border-b-gray-200">Company setup</a>
 

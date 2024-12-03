@@ -36,6 +36,23 @@ class RentDetails extends Component
             $this->rentalbike = Rent::find($id);
         }
     }
+    public function cancelrent($id)
+    {
+
+        $rental = Rent::find($id);
+    
+        if ($rental) {
+            // Delete the rental record
+            $rental->delete();
+            session()->flash('message', 'Rent successfully canceled.');
+    
+            $this->render();
+        } else {
+            // Show an error message if the record doesn't exist
+            session()->flash('error', 'Rent not found.');
+        }
+    }
+    
 
     public function exportpdf()
     {

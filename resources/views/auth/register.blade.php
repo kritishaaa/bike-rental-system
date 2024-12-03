@@ -48,6 +48,13 @@
                 <x-input-error :messages="$errors->get('license_number')" class="mt-2" />
             </div>
 
+             <div class="mt-4">
+                <x-input-label for="documents" :value="__('Upload Document')" />
+                <x-text-input id="documents" class="block mt-1 w-full" type="file" name="documents" accept=".pdf,.jpg,.png"
+                    required />
+                <x-input-error :messages="$errors->get('documents')" class="mt-2" />
+            </div>
+
 
 
             <div class="flex flex-col items-center justify-end mt-4">

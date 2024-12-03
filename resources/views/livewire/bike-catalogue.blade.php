@@ -69,7 +69,7 @@
                         <h2 class="text-xl font-semibold text-gray-800">{{ $bike->variant->variant_name }}</h2>
                         <p class="mt-1">
                             <span class="text-gray-700 font-semibold"> Brand:</span>
-                            <span class=""text-gray-800 ml-2">{{ $bike->brand_name }}.</span>
+                            <span class="text-gray-800 ml-2">{{ $bike->brand_name }}.</span>
                         </p>
                         <div class="mt-1">
                             <span class="text-gray-700 font-semibold">Rental Price:</span>

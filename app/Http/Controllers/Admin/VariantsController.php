@@ -63,7 +63,7 @@ class VariantsController extends Controller
         $variants = Variant::all();
         $success = 'Created new variant successfully';
 
-        return redirect(route('Variants.index'))->with('success', $success);
+        return redirect(route('variants.index'))->with('success', $success);
     }
 
     /**
